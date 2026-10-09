@@ -170,8 +170,8 @@ label{display:block;font-size:13px;color:var(--sub);margin:12px 0 4px}
             toast(ok?'복사했습니다':'복사하지 못했습니다');
             if(ok){ el.classList.add('copied'); setTimeout(()=>el.classList.remove('copied'),1200); }
           }),
-          btn('수정','',()=>{ editingId=p.id; render(); }),
           spacer(),
+          btn('수정','',()=>{ editingId=p.id; render(); }),
           btn('삭제','danger',()=>{
             if(confirm('이 문구를 삭제할까요?')){ phrases=phrases.filter(x=>x.id!==p.id); persist(); toast('삭제했습니다'); }
           })
