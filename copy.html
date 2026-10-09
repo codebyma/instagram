@@ -28,8 +28,8 @@ button.primary{background:var(--accent);color:var(--accent-ink);border-color:var
 button.danger{color:var(--danger)}
 button:disabled{opacity:.5;cursor:default}
 .spacer{flex:1}
-.item{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin-bottom:10px}
-.item-title{font-weight:600;font-size:14px;margin:16px 2px 6px;word-break:break-word}
+.item{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin-bottom:20px}
+.item-title{font-weight:600;font-size:16px;margin:28px 2px 8px;word-break:break-word}
 .item-title:first-child{margin-top:0}
 .item .text{white-space:pre-wrap;word-break:break-word}
 .item .row{margin-top:10px}
@@ -54,19 +54,20 @@ label{display:block;font-size:13px;color:var(--sub);margin:12px 0 4px}
 <main>
   <h1>문구 복사</h1>
 
+  <div class="bar">
+    <input type="text" id="search" placeholder="문구 검색" aria-label="문구 검색">
+    <span class="status" id="status"></span>
+  </div>
+  <div id="list"></div>
+
+  <h2>새 문구</h2>
+  <input type="text" id="quickTitle" placeholder="제목 (선택)" aria-label="제목" style="margin-bottom:8px">
   <textarea id="quick" placeholder="텍스트를 입력하세요" aria-label="텍스트 입력"></textarea>
   <div class="row">
     <button class="primary" id="quickCopy">복사</button>
     <button id="quickSave">문구로 저장</button>
     <button id="quickClear">지우기</button>
   </div>
-
-  <h2>저장된 문구</h2>
-  <div class="bar">
-    <input type="text" id="search" placeholder="문구 검색" aria-label="문구 검색">
-    <span class="status" id="status"></span>
-  </div>
-  <div id="list"></div>
 
   <h2>GitHub에 저장</h2>
   <div class="row" style="margin-top:0">
@@ -275,9 +276,9 @@ label{display:block;font-size:13px;color:var(--sub);margin:12px 0 4px}
   };
   $('quickSave').onclick=()=>{
     const v=$('quick').value; if(!v.trim()){ toast('내용을 입력하세요'); return; }
-    phrases.unshift({id:uid(),title:'',text:v}); $('quick').value=''; persist(); toast('문구로 저장했습니다');
+    phrases.unshift({id:uid(),title:$('quickTitle').value.trim(),text:v}); $('quick').value=''; $('quickTitle').value=''; persist(); toast('문구로 저장했습니다');
   };
-  $('quickClear').onclick=()=>{ $('quick').value=''; $('quick').focus(); };
+  $('quickClear').onclick=()=>{ $('quick').value=''; $('quickTitle').value=''; $('quickTitle').focus(); };
   $('search').addEventListener('input',render);
   $('commit').onclick=commit;
   $('pull').onclick=pull;
