@@ -85,7 +85,7 @@ label{display:block;font-size:13px;color:var(--sub);margin:12px 0 4px}
       <div><label for="sOwner">계정(owner)</label><input type="text" id="sOwner" autocomplete="off"></div>
       <div><label for="sRepo">저장소(repo)</label><input type="text" id="sRepo" autocomplete="off"></div>
       <div><label for="sBranch">브랜치</label><input type="text" id="sBranch" placeholder="main" autocomplete="off"></div>
-      <div><label for="sPath">저장 파일 경로</label><input type="text" id="sPath" placeholder="phrases.json" autocomplete="off"></div>
+      <div><label for="sPath">저장 파일 경로</label><input type="text" id="sPath" placeholder="phrases2.json" autocomplete="off"></div>
     </div>
     <label for="sToken">Personal Access Token</label>
     <input type="password" id="sToken" autocomplete="off" placeholder="github_pat_...">
@@ -188,7 +188,7 @@ label{display:block;font-size:13px;color:var(--sub);margin:12px 0 4px}
 
   // ---------- GitHub ----------
   function defaults(){
-    const cfg={owner:'',repo:'',branch:'main',path:'phrases.json',token:''};
+    const cfg={owner:'',repo:'',branch:'main',path:'phrases2.json',token:''};
     const h=location.hostname;
     if(h.endsWith('.github.io')){
       cfg.owner=h.split('.')[0];
@@ -208,7 +208,7 @@ label{display:block;font-size:13px;color:var(--sub);margin:12px 0 4px}
   function readCfg(){
     return {
       owner:$('sOwner').value.trim(), repo:$('sRepo').value.trim(),
-      branch:$('sBranch').value.trim()||'main', path:$('sPath').value.trim()||'phrases.json',
+      branch:$('sBranch').value.trim()||'main', path:$('sPath').value.trim()||'phrases2.json',
       token:$('sToken').value.trim()
     };
   }
@@ -285,7 +285,7 @@ label{display:block;font-size:13px;color:var(--sub);margin:12px 0 4px}
   $('download').onclick=()=>{
     const a=document.createElement('a');
     a.href=URL.createObjectURL(new Blob([JSON.stringify(phrases,null,2)+'\n'],{type:'application/json'}));
-    a.download='phrases.json'; a.click(); URL.revokeObjectURL(a.href);
+    a.download='phrases2.json'; a.click(); URL.revokeObjectURL(a.href);
   };
   $('sSave').onclick=()=>{ lsSet(LS.cfg,JSON.stringify(readCfg())); toast('설정을 저장했습니다'); };
 
